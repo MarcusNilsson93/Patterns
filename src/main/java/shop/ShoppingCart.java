@@ -1,5 +1,7 @@
 package shop;
 
+import shop.undo.HistoryStack;
+
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -7,13 +9,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ShoppingCart implements Discounts {
+public class ShoppingCart {
 
     private final Set<ShoppingCartItem> items = new HashSet<>();
 
-    public void addCartItem(ShoppingCartItem item){
-        items.add(item);
-    }
+    public void addCartItem(ShoppingCartItem item){ items.add(item); }
 
     public Stream<ShoppingCartItem> stream(){
         return items.stream();
@@ -27,19 +27,18 @@ public class ShoppingCart implements Discounts {
             sum = item.itemCost().multiply(BigDecimal.valueOf(item.quantity())).add(sum);
         }
         //if sum bigdecimal bigger then 500
-        System.out.println(sum.compareTo(TenProcent));
         if(sum.compareTo(TenProcent) > 0){
-            OverFiveHundred(sum);
+            //OverFiveHundred(sum);
         }
         return sum;
     }
 
-    public void undo(){
+    public void undo(HistoryStack stack){
         //Undo the latest change to the ShoppingCart
     }
 
 
-    public void redo(){
+    public void redo(HistoryStack stack){
         //Redo the latest change to the ShoppingCart
     }
 
@@ -58,19 +57,22 @@ public class ShoppingCart implements Discounts {
         return sb.toString();
     }
 
-    @Override
+   /* @Override
     public void BuyThreePayForTwo() {
 
     }
 
     @Override
-    public void OverFiveHundred(BigDecimal D) {
+    public BigDecimal OverFiveHundred(BigDecimal D) {
+        BigDecimal result = new BigDecimal("0.10").multiply(D);
+        return result;
         // 0.10 * D = så mycket som skall dras bort på summan
+        //BigDecimal result = new BigDecimal(doubleValue).multiply(factor2);
 
     }
 
     @Override
     public void BuyFiveGetOneForFree() {
 
-    }
+    }*/
 }

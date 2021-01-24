@@ -1,13 +1,15 @@
 package shop;
 
 import org.jetbrains.annotations.NotNull;
+import shop.undo.HistoryStack;
+import shop.undo.State;
 
 import java.math.BigDecimal;
 
 public class ShoppingCartItem {
     private final BigDecimal itemCost;
     private final Product product;
-    private final int quantity;
+    private int quantity;
 
     public ShoppingCartItem(@NotNull Product product, double itemCost, int quantity) {
         this.itemCost = BigDecimal.valueOf(itemCost);
@@ -25,6 +27,18 @@ public class ShoppingCartItem {
 
     public BigDecimal itemCost() {
         return itemCost;
+    }
+
+    public void setQuantity(int newQuantity) {
+        int prevQuantity = this.quantity;
+
+        HistoryStack.addState(new State(() -> {
+            this.quantity = prevQuantity;
+        }, () -> {
+            this.quantity = newQuantity;
+        }));
+
+        this.quantity = newQuantity;
     }
 
     @Override

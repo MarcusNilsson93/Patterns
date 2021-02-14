@@ -35,11 +35,13 @@ public class ShoppingCart {
 
     public void undo(HistoryStack stack){
         //Undo the latest change to the ShoppingCart
+        stack.undo();
     }
 
 
     public void redo(HistoryStack stack){
         //Redo the latest change to the ShoppingCart
+        stack.redo();
     }
 
     public String receipt() {

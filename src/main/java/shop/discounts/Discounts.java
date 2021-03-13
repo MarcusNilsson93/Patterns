@@ -8,4 +8,5 @@ import java.util.ArrayList;
 public interface Discounts {
    BigDecimal returnDiscount(ArrayList<ShoppingCartItem> items);
    String discountValue();
+   String name();
 }

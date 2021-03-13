@@ -29,4 +29,9 @@ public class BuyThreeForTwo implements Discounts {
     public String discountValue() {
         return "minus"+ discount;
     }
+
+    @Override
+    public String name() {
+        return "three for two";
+    }
 }

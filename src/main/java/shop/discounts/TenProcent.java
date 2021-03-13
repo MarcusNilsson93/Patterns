@@ -33,4 +33,9 @@ public class TenProcent implements Discounts{
     public String discountValue() {
         return "minus"+discount;
     }
+
+    @Override
+    public String name() {
+        return "10% discount";
+    }
 }
